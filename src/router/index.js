@@ -10,19 +10,19 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomePage,
-      meta: { title: 'Home' },
+      meta: { title: 'Головна' },
     },
     {
       path: '/login',
       name: 'login',
       component: HeaderAuthForm,
-      meta: { title: 'Login' },
+      meta: { title: 'Авторизація' },
     },
     {
       path: '/clients',
       name: 'clients',
       component: ClientsPage,
-      meta: { title: 'Clients' },
+      meta: { title: 'Клієнти' },
     },
   ],
 });
