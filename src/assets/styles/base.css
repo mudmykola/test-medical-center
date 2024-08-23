@@ -1,0 +1,45 @@
+:root {
+  --container-width: 1240px;
+  --text-size: 16px;
+  --title-size: 20px;
+  --text-small-size: 14px;
+  --link-color: #757575;
+  --active-color: #4bad3b;
+  --site-background-color: #ffffff;
+  --base-text-color: #272727;
+}
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--base-text-color);
+}
+
+h1 {
+  font-size: var(--title-size);
+}
+
+p,
+span,
+a {
+  color: var(--base-text-color);
+  font-size: var(--text-size);
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+a.active {
+  color: var(--active-color);
+}
