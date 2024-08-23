@@ -1,11 +1,13 @@
 :root {
   --container-width: 1240px;
-  --text-size: 16px;
-  --title-size: 20px;
-  --text-small-size: 14px;
+  --text-size: 1rem;
+  --title-size: 1.25rem;
+  --text-small-size: 0.875rem;
   --link-color: #757575;
+  --logout-hover: #E21818;
   --active-color: #4bad3b;
-  --site-background-color: #ffffff;
+  --site-background-color: #FAFAFA;
+  --header-background-color: #ffffff;
   --base-text-color: #272727;
 }
 
@@ -42,4 +44,15 @@ a {
 
 a.active {
   color: var(--active-color);
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
 }

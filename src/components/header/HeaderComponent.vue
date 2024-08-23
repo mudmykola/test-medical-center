@@ -7,13 +7,11 @@ const userStore = useUserStore();
 const router = useRouter();
 
 const greetingText = 'Привіт, ';
-const logoutText = 'Вийти';
 const loginPromptText = 'Для доступу, будь ласка, ';
 const loginLinkText = 'увійдіть';
 
-const handleLogout = () => {
-  userStore.clearUser();
-  router.push('/');
+const handleLoginRedirect = () => {
+  router.push('/login');
 };
 </script>
 
@@ -24,19 +22,19 @@ const handleLogout = () => {
     </div>
     <div class="header-inner__auth">
       <h2 v-if="userStore.username">
-        {{ greetingText }}{{ userStore.username }}<span></span>
+        <span>{{ greetingText }}</span
+        >{{ userStore.username }}
       </h2>
       <img
         v-if="userStore.avatarUrl"
         :src="userStore.avatarUrl"
         alt="User Avatar"
       />
-      <button v-if="userStore.username" @click="handleLogout">
-        {{ logoutText }}
-      </button>
       <p v-else>
         {{ loginPromptText
-        }}<router-link to="/login">{{ loginLinkText }}</router-link
+        }}<router-link to="/login" @click.native="handleLoginRedirect">{{
+          loginLinkText
+        }}</router-link
         >.
       </p>
     </div>
@@ -44,38 +42,5 @@ const handleLogout = () => {
 </template>
 
 <style scoped lang="scss">
-.header-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-}
-
-.header-inner__auth {
-  display: flex;
-  align-items: center;
-
-  h2 {
-    margin-right: 1rem;
-    font-size: var(--text-size);
-    color: var(--base-text-color);
-  }
-
-  img {
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    margin-right: 1rem;
-  }
-
-  button {
-    padding: 0.5rem;
-    font-size: var(--text-size);
-    background-color: var(--active-color);
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-}
+@import 'header-style';
 </style>
