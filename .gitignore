@@ -8,7 +8,7 @@ dist
 firebase.json
 *.firebaserc
 *.firebase/hosting.ZGlzdA.cache
-!.env.local
+.env.local
 
 # JavaScript configuration
 jsconfig.json
