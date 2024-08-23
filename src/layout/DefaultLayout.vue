@@ -4,7 +4,7 @@ import HeaderComponent from '../components/header/HeaderComponent.vue';
 </script>
 
 <template>
-  <div class="default-layout">
+  <div class="default-layout container">
     <header class="header">
       <HeaderComponent />
     </header>
