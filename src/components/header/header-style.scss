@@ -1,0 +1,46 @@
+.header-inner {
+  background: var(--header-background-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1.875rem;
+}
+
+.header-inner__auth {
+  display: flex;
+  align-items: center;
+
+  h2 {
+    margin-right: 1rem;
+    font-size: var(--text-size);
+    color: var(--base-text-color);
+  }
+
+  span {
+    font-weight: 400;
+  }
+
+  img {
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-right: 1rem;
+  }
+
+  p {
+    font-size: var(--text-size);
+    color: var(--base-text-color);
+  }
+
+  router-link {
+    padding: 0.5rem;
+    font-size: var(--text-size);
+    background-color: var(--active-color);
+    color: #fff;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    text-decoration: none;
+  }
+}

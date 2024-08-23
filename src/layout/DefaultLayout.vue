@@ -4,7 +4,7 @@ import HeaderComponent from '../components/header/HeaderComponent.vue';
 </script>
 
 <template>
-  <div class="default-layout container">
+  <div class="default-layout">
     <header class="header">
       <HeaderComponent />
     </header>
@@ -16,12 +16,9 @@ import HeaderComponent from '../components/header/HeaderComponent.vue';
         <slot />
       </div>
     </main>
-    <footer class="footer">footer</footer>
   </div>
 </template>
 
-<style lang="scss">
-.main {
-  display: flex;
-}
+<style scoped lang="scss">
+@import 'default-layout.scss';
 </style>

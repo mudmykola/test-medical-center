@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '../views/home/HomePage.vue';
 import HeaderAuthForm from '@/components/header/HeaderAuthForm.vue';
+import ClientsPage from '@/views/clients/ClientsPage.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,6 +17,12 @@ const router = createRouter({
       name: 'login',
       component: HeaderAuthForm,
       meta: { title: 'Login' },
+    },
+    {
+      path: '/clients',
+      name: 'clients',
+      component: ClientsPage,
+      meta: { title: 'Clients' },
     },
   ],
 });
