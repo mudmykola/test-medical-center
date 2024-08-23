@@ -1,0 +1,35 @@
+# Biome configuration
+biome.json
+
+# Build output
+dist
+
+# Firebase configuration
+firebase.json
+
+# Static files
+index.html
+
+# JavaScript configuration
+jsconfig.json
+
+# Node.js dependencies
+node_modules
+
+# Package lock file
+package-lock.json
+
+# Package file
+package.json
+
+# Public files
+public
+
+# README file
+README.md
+
+# Source files
+src
+
+# Vite configuration
+vite.config.js
