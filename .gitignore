@@ -24,6 +24,7 @@ package.json
 
 # Public files
 public
+.idea
 
 
 # Vite configuration
