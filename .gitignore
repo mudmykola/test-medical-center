@@ -6,9 +6,9 @@ dist
 
 # Firebase configuration
 firebase.json
-
-# Static files
-index.html
+*.firebaserc
+*.firebase/hosting.ZGlzdA.cache
+!.env.local
 
 # JavaScript configuration
 jsconfig.json
@@ -25,11 +25,6 @@ package.json
 # Public files
 public
 
-# README file
-README.md
-
-# Source files
-src
 
 # Vite configuration
 vite.config.js
