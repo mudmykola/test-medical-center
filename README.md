@@ -40,6 +40,17 @@ Clicking on the "Clients" tab opens the client management component:
 - **📑 Category Selector:** A dropdown to select a specific category to filter
   and display only clients belonging to the selected category.
 
+### 🛡️ Authentication
+
+- **👤 User Authentication:** Integrated with Firebase for secure user login and registration.
+- **🔐 Password Recovery:** Ability to reset password via email.
+- **🔑 Default Admin Login:** Use the username and password combination `admin` to log in with administrative privileges.
+
+### 🔍 Advanced Search & Filters
+
+- **⚡ Fast Search:** Real-time search and filtering capabilities for quick access to client and employee information.
+- **🔍 Category Filters:** Filter clients and employees by categories for more organized management.
+
 ## 🛠️ Technologies
 
 The project is built using the following technologies:
