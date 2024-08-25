@@ -1,6 +1,8 @@
 <script setup>
 import { ref, computed, onMounted } from "vue";
 import { format } from "date-fns";
+import SearchIcon from "@/components/icons/SearchIcon.vue";
+import RemoveIcon from "@/components/icons/RemoveIcon.vue";
 
 const LOCAL_STORAGE_KEY = "clients";
 
@@ -146,7 +148,7 @@ onMounted(() => {
 
       <div class="clients-function__search">
         <div class="search-icon">
-          р
+          <SearchIcon/>
         </div>
         <input
           type="text"
@@ -159,14 +161,20 @@ onMounted(() => {
       <div class="clients-function__category">
         <select v-model="selectedCategory">
           <option value="">{{ staticTexts.selectCategoryPlaceholder }}</option>
-          <option v-for="category in categories" :key="category" :value="category">
+          <option
+            v-for="category in categories"
+            :key="category"
+            :value="category"
+          >
             {{ category }}
           </option>
         </select>
       </div>
 
       <div class="clients-function__add">
-        <button @click="showAddClientForm = true">{{ staticTexts.addClientTitle }} +</button>
+        <button @click="showAddClientForm = true">
+          {{ staticTexts.addClientTitle }} +
+        </button>
       </div>
     </div>
 
@@ -180,7 +188,11 @@ onMounted(() => {
       />
       <select v-model="newClient.category" class="input-field">
         <option value="">{{ staticTexts.selectCategory }}</option>
-        <option v-for="category in categories" :key="category" :value="category">
+        <option
+          v-for="category in categories"
+          :key="category"
+          :value="category"
+        >
           {{ category }}
         </option>
       </select>
@@ -192,35 +204,41 @@ onMounted(() => {
         maxlength="16"
         @input="updatePhone($event.target.value)"
       />
-      <button @click="addClient" class="save-button">{{ staticTexts.saveButton }}</button>
-      <button @click="showAddClientForm = false" class="cancel-button">{{ staticTexts.cancelButton }}</button>
+      <button @click="addClient" class="save-button">
+        {{ staticTexts.saveButton }}
+      </button>
+      <button @click="showAddClientForm = false" class="cancel-button">
+        {{ staticTexts.cancelButton }}
+      </button>
     </div>
 
-    <table class="clients-list">
+    <table id="clients-list" class="clients-list">
       <thead>
-      <tr>
-        <th>Ім’я/Нікнейм</th>
-        <th>Категорія</th>
-        <th>Телефон</th>
-        <th>Дата оновлення</th>
-        <th></th>
-      </tr>
+        <tr>
+          <th>Ім’я/Нікнейм</th>
+          <th>Категорія</th>
+          <th>Телефон</th>
+          <th>Дата оновлення</th>
+          <th></th>
+        </tr>
       </thead>
       <tbody>
-      <tr v-for="(client, index) in filteredClients" :key="client.phone">
-        <td>{{ client.name }}</td>
-        <td>{{ client.category }}</td>
-        <td>{{ client.phone }}</td>
-        <td>{{ formatDate(client.addedAt) }}</td>
-        <td>
-          <button @click="removeClient(index)" class="delete-button">{{ staticTexts.deleteButton }}</button>
-        </td>
-      </tr>
+        <tr class="clients-list__td" v-for="(client, index) in filteredClients" :key="client.phone">
+          <td>{{ client.name }}</td>
+          <td>{{ client.category }}</td>
+          <td>{{ client.phone }}</td>
+          <td>{{ formatDate(client.addedAt) }}</td>
+          <td>
+            <button @click="removeClient(index)" class="delete-button">
+              <RemoveIcon/>
+            </button>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
 </template>
 
 <style scoped lang="scss">
-@import "clients-style";
+@import 'clients-style';
 </style>

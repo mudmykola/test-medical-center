@@ -1,5 +1,6 @@
 .clients {
-  padding: 1rem;
+  padding: 0 1rem;
+  background-color: var(--site-background-color);
 }
 
 .clients-function {
@@ -26,7 +27,7 @@
   &__search {
     display: flex;
     align-items: center;
-    background-color: transparent;
+    background-color: var(--header-background-color);
     width: 14.3125rem;
     height: 2.8125rem;
 
@@ -49,13 +50,11 @@
       justify-content: center;
       width: 2rem;
       height: 100%;
-
       background-color: transparent;
 
       svg {
         width: 1rem;
         height: 1rem;
-        fill: #9c9f9b;
       }
     }
   }
@@ -66,7 +65,7 @@
       font-size: 1rem;
       font-weight: 400;
       color: #333;
-      background-color: transparent;
+      background-color: var(--header-background-color);
       border: none;
       border-radius: 0.25rem;
       width: 17.5rem;
@@ -158,27 +157,32 @@
   width: 100%;
   border-collapse: collapse;
 
+  &__td {
+    border: 1px solid #ccc;
+    gap: 20px;
+  }
+
   thead {
-    background-color: #f8f9fa;
+    background-color: var(--header-background-color);
+
+    tr {
+      height: 3.125rem;
+    }
 
     th {
       padding: 0.5rem;
       text-align: left;
+      font-size: 0.875rem;
+      color: var(--th-text-color);
+      font-weight: 400;
     }
   }
 
   tbody {
-    tr {
-      &:nth-child(odd) {
-        background-color: #f9f9f9;
-      }
-
-      &:nth-child(even) {
-        background-color: #fff;
-      }
-    }
+    background: #ffffff;
 
     td {
+      border-radius: 0.25rem;
       padding: 0.5rem;
     }
   }
@@ -187,13 +191,7 @@
 .delete-button {
   padding: 0.25rem 0.5rem;
   font-size: 1rem;
-  color: #fff;
-  background-color: #dc3545;
   border: none;
-  border-radius: 0.25rem;
   cursor: pointer;
-
-  &:hover {
-    background-color: #c82333;
-  }
+  background: transparent;
 }

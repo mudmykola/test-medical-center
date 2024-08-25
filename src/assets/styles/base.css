@@ -9,6 +9,7 @@
   --site-background-color: #FAFAFA;
   --header-background-color: #ffffff;
   --base-text-color: #272727;
+  --th-text-color: #9C9F9B;
 }
 
 .container {
@@ -16,6 +17,10 @@
   margin: 0 auto;
   padding: 0 1rem;
 }
+.main-content{
+  background-color: var(--site-background-color) !important;
+}
+
 
 h1,
 h2,
