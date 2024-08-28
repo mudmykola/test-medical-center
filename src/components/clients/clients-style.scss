@@ -155,17 +155,22 @@
 
 .clients-list {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
 
   &__td {
-    border: 1px solid #ccc;
-    gap: 20px;
+    display: table-row;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   }
 
   thead {
     background-color: var(--header-background-color);
 
     tr {
+      border: 1px solid var(--th-border-color);
       height: 3.125rem;
     }
 
@@ -180,9 +185,9 @@
 
   tbody {
     background: #ffffff;
+    border-spacing: 0 20px;
 
     td {
-      border-radius: 0.25rem;
       padding: 0.5rem;
     }
   }

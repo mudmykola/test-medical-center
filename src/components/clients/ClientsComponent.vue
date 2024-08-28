@@ -1,67 +1,54 @@
 <script setup>
-import { ref, computed, onMounted } from "vue";
-import { format } from "date-fns";
-import SearchIcon from "@/components/icons/SearchIcon.vue";
-import RemoveIcon from "@/components/icons/RemoveIcon.vue";
+import { ref, computed, onMounted } from 'vue';
+import { format } from 'date-fns';
+import { useSearchStore } from '@/stores/searchStore';
+import SearchComponent from '@/components/clients/ClientSearchComponent.vue';
+import CategorySelectComponent from '@/components/clients/ClientsCategorySelectComponent.vue';
+import RemoveIcon from '@/components/icons/RemoveIcon.vue';
 
-const LOCAL_STORAGE_KEY = "clients";
+const LOCAL_STORAGE_KEY = 'clients';
 
-const staticTexts = {
-  clientsTitle: "Клієнти",
-  searchPlaceholder: "Пошук",
-  selectCategoryPlaceholder: "Виберіть зі списку",
-  selectCategory: "Виберіть категорію",
-  addClientTitle: "Додати",
-  clientNamePlaceholder: "Ім'я клієнта",
-  phonePlaceholder: "Номер телефону (з кодом країни)",
-  saveButton: "Зберегти",
-  cancelButton: "Скасувати",
-  deleteButton: "Видалити",
-};
+const searchStore = useSearchStore();
 
 const staticClients = ref([
   {
-    name: "Іван Іванов",
-    category: "Категорія 1",
-    phone: "+380123456789",
+    name: 'Іван Іванов',
+    category: 'Категорія 1',
+    phone: '+380123456789',
     addedAt: new Date().toISOString(),
   },
   {
-    name: "Марія Петрова",
-    category: "Категорія 2",
-    phone: "+380987654321",
+    name: 'Марія Петрова',
+    category: 'Категорія 2',
+    phone: '+380987654321',
     addedAt: new Date().toISOString(),
   },
   {
-    name: "Олександр Сидоров",
-    category: "Категорія 1",
-    phone: "+380555555555",
+    name: 'Олександр Сидоров',
+    category: 'Категорія 1',
+    phone: '+380555555555',
     addedAt: new Date().toISOString(),
   },
 ]);
 
-const categories = ["Категорія 1", "Категорія 2"];
-
-const selectedCategory = ref("");
-
-const searchQuery = ref("");
+const categories = ['Категорія 1', 'Категорія 2'];
+const selectedCategory = ref('');
 
 const filteredClients = computed(() => {
+  const queryLower = searchStore.searchQuery.toLowerCase();
   return staticClients.value.filter((client) => {
-    const queryLower = searchQuery.value.toLowerCase();
     const matchesSearch =
       client.name.toLowerCase().includes(queryLower) ||
       client.category.toLowerCase().includes(queryLower) ||
       client.phone.toLowerCase().includes(queryLower);
     const matchesCategory =
-      selectedCategory.value === "" ||
+      selectedCategory.value === '' ||
       client.category.toLowerCase() === selectedCategory.value.toLowerCase();
     return matchesSearch && matchesCategory;
   });
 });
 
-const newClient = ref({ name: "", category: "", phone: "" });
-
+const newClient = ref({ name: '', category: '', phone: '' });
 const showAddClientForm = ref(false);
 
 const loadClientsFromLocalStorage = () => {
@@ -77,7 +64,7 @@ const loadClientsFromLocalStorage = () => {
         };
       });
     } catch (error) {
-      console.error("Error parsing clients from Local Storage", error);
+      console.error('Error parsing clients from Local Storage', error);
       staticClients.value = [];
     }
   }
@@ -103,7 +90,7 @@ const addClient = () => {
       addedAt: new Date().toISOString(),
     });
     saveClientsToLocalStorage();
-    newClient.value = { name: "", category: "", phone: "" };
+    newClient.value = { name: '', category: '', phone: '' };
     showAddClientForm.value = false;
   }
 };
@@ -119,7 +106,7 @@ const validatePhone = (phone) => {
 };
 
 const updatePhone = (value) => {
-  const cleanedValue = value.replace(/[^+\d]/g, "");
+  const cleanedValue = value.replace(/[^+\d]/g, '');
   if (cleanedValue.length <= 16) {
     newClient.value.phone = cleanedValue;
   }
@@ -128,9 +115,13 @@ const updatePhone = (value) => {
 const formatDate = (dateStr) => {
   const date = new Date(dateStr);
   if (isNaN(date.getTime())) {
-    return "Invalid Date";
+    return 'Invalid Date';
   }
-  return format(date, "dd/MM/yyyy HH:mm");
+  return format(date, 'dd/MM/yyyy HH:mm');
+};
+
+const updateCategory = (category) => {
+  selectedCategory.value = category;
 };
 
 onMounted(() => {
@@ -142,52 +133,31 @@ onMounted(() => {
   <div class="clients">
     <div class="clients-function">
       <div class="clients-function__quantity">
-        <h2>{{ staticTexts.clientsTitle }}</h2>
+        <h2>Клієнти</h2>
         <span>{{ filteredClients.length }} чоловік</span>
       </div>
-
-      <div class="clients-function__search">
-        <div class="search-icon">
-          <SearchIcon/>
-        </div>
-        <input
-          type="text"
-          v-model="searchQuery"
-          :placeholder="staticTexts.searchPlaceholder"
-          class="search-input"
-        />
-      </div>
-
-      <div class="clients-function__category">
-        <select v-model="selectedCategory">
-          <option value="">{{ staticTexts.selectCategoryPlaceholder }}</option>
-          <option
-            v-for="category in categories"
-            :key="category"
-            :value="category"
-          >
-            {{ category }}
-          </option>
-        </select>
-      </div>
+      <SearchComponent />
+      <CategorySelectComponent
+        :categories="categories"
+        v-model="selectedCategory"
+        placeholder="Виберіть зі списку"
+      />
 
       <div class="clients-function__add">
-        <button @click="showAddClientForm = true">
-          {{ staticTexts.addClientTitle }} +
-        </button>
+        <button @click="showAddClientForm = true">Додати +</button>
       </div>
     </div>
 
     <div v-if="showAddClientForm" class="add-client-form">
-      <h3>{{ staticTexts.addClientTitle }}</h3>
+      <h3>Додати</h3>
       <input
         type="text"
         v-model="newClient.name"
-        :placeholder="staticTexts.clientNamePlaceholder"
+        placeholder="Ім'я клієнта"
         class="input-field"
       />
       <select v-model="newClient.category" class="input-field">
-        <option value="">{{ staticTexts.selectCategory }}</option>
+        <option value="">Виберіть категорію</option>
         <option
           v-for="category in categories"
           :key="category"
@@ -199,16 +169,14 @@ onMounted(() => {
       <input
         type="text"
         :value="newClient.phone"
-        :placeholder="staticTexts.phonePlaceholder"
+        placeholder="Номер телефону (з кодом країни)"
         class="input-field"
         maxlength="16"
         @input="updatePhone($event.target.value)"
       />
-      <button @click="addClient" class="save-button">
-        {{ staticTexts.saveButton }}
-      </button>
+      <button @click="addClient" class="save-button">Зберегти</button>
       <button @click="showAddClientForm = false" class="cancel-button">
-        {{ staticTexts.cancelButton }}
+        Скасувати
       </button>
     </div>
 
@@ -223,14 +191,18 @@ onMounted(() => {
         </tr>
       </thead>
       <tbody>
-        <tr class="clients-list__td" v-for="(client, index) in filteredClients" :key="client.phone">
+        <tr
+          class="clients-list__td"
+          v-for="(client, index) in filteredClients"
+          :key="client.phone"
+        >
           <td>{{ client.name }}</td>
           <td>{{ client.category }}</td>
           <td>{{ client.phone }}</td>
           <td>{{ formatDate(client.addedAt) }}</td>
           <td>
             <button @click="removeClient(index)" class="delete-button">
-              <RemoveIcon/>
+              <RemoveIcon />
             </button>
           </td>
         </tr>
